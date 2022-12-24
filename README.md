@@ -14,7 +14,7 @@ Pode ser alterado dentro do código nessa linha:
 ### *Obs!*
 Crie um arquivo chamado `.bash_login` Ou `.bashrc` dentro do diretório raíz do termux e adicione o seguinte:
 ```
-bash $HOME/Termux-Login-Shell/login.sh
+bash $HOME/Linux-Login/login.sh
 ```
 
 *Sai e entre no termux*

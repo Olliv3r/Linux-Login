@@ -5,5 +5,7 @@
 #
 
 rm -rf $HOME/Linux-Login
-sed -i "s/bash $HOME\/Linux-Login//g" $HOME/.bash_login
+cd $HOME
+sed -i "s/bash.*login.sh//g" $HOME/.bash_login
 echo -e "\e[32mTudo ok\e[0m"
+sleep 1

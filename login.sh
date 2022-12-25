@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
-# login.sh - Login do shell linux
-# Version 0.2
-# Author: Oliver - programadorboard.epizy.com
-# Description: Login do shell linux
-# License: MIT License
+# login.sh
+#
+# 
 
 unset usuario
 unset senha
@@ -144,8 +142,13 @@ while IFS= read -r -s -n1 mascara_senha; do
 	fi
 done
 
+acesso() {
+    tput reset
+    echo
+    echo
+    neofetch --ascii_distro kali_small -L
+}
+
 # Execução
 
-if [[ $chave_usuario == 1 ]] && [[ $chave_senha == 1 ]] ; then
-	echo -e "\n\n\e[5;45;0mLogado como \e[0m[\e[34m$(whoami)\e[0m]"
-fi
+[ $chave_usuario == 1 ] && [ $chave_senha == 1 ] && acesso && exit 0

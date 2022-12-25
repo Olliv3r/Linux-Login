@@ -189,7 +189,7 @@ f_senha() {
 	    caractere+=${mascara_senha}
 
 	    # Mascara ou caractere (pode alterar)
-	    printf "\e[32;5m×\e[0m"
+	    printf "\e[32;5m*\e[0m"
 
 	    if [[ ${senha} == ${login_senha} ]] ; then
 		chave_senha=1

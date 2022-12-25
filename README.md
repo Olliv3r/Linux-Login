@@ -1,7 +1,7 @@
 ## Painel de login para linux
 Painel de login básico: 
 
-![Captura](https://github.com/Olliv3r/Linux-Login/blob/main/src/imagens/Screenshot_20221225-114428_Termux.jpg)
+![Captura](https://github.com/Olliv3r/Linux-Login/blob/main/media/main.jpg)
 
 ### Login padrão 
 Usuário e Senha padrão: 
@@ -9,7 +9,7 @@ Usuário e Senha padrão:
 `toor` 
 
 Pode ser alterado dentro do código nessa linha: 
-![Captura](https://github.com/Olliv3r/Linux-Login/blob/main/src/imagens/alterar.jpg)
+![Captura](https://github.com/Olliv3r/Linux-Login/blob/main/media/login_padrao.jpg)
 
 ### *Obs!*
 Crie um arquivo chamado `.bash_login` Ou `.bashrc` dentro do diretório raíz do termux e adicione o seguinte:
@@ -34,10 +34,10 @@ source <(curl -fsSL https://raw.githubusercontent.com/Olliv3r/Linux-Login/main/r
 *Você pode escolher se deseja mascarar ou não o usuário e senha, pode alterar nessas linhas:*
 
 #### Usuário:
-![Captura](https://github.com/Olliv3r/Linux-Login/blob/main/src/imagens/20221216_001138.jpg)
+![Captura](https://github.com/Olliv3r/Linux-Login/blob/main/media/alterar_usuario.jpg)
 
 #### Senha:
-![Captura](https://github.com/Olliv3r/Linux-Login/blob/main/src/imagens/20221216_001050.jpg)
+![Captura](https://github.com/Olliv3r/Linux-Login/blob/main/media/alterar_senha.jpg)
 
 ### Recursos:
 

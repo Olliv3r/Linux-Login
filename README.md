@@ -1,7 +1,7 @@
 ## Painel de login para linux
 Painel de login básico: 
 
-![Captura](https://github.com/Olliv3r/Linux-Login/blob/main/src/imagens/https://github.com/Olliv3r/Linux-Login/blob/main/src/imagens/Screenshot_20221225-114428_Termux.jpg)
+![Captura](https://github.com/Olliv3r/Linux-Login/blob/main/src/imagens/Screenshot_20221225-114428_Termux.jpg)
 
 ### Login padrão 
 Usuário e Senha padrão: 

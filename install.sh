@@ -7,7 +7,7 @@
 echo -e "\e[32mInstalando...\e[0m"
 pkg update -y #> /dev/null 2>&1
 pkg upgrade -y #> /dev/null 2>&1
-pkg install ncurses-utils git -y > /dev/null 2>&1
+pkg install ncurses-utils git neofetch -y > /dev/null 2>&1
 git clone https://github.com/Olliv3r/Linux-Login > /dev/null 2>&1
 
 echo -e "\e[32mConfigurando...\e[0m"

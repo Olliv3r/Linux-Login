@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
-# 
+# login.sh - Adiciona uma segurança no terminal linux
+# Obs.: Usa arquivos de configuração como base
+#
+# Site      : https://programadorboard.epizy.com/autor
+# Autor     : Oliver Silva <programadorboard@gmail.com>
+# Munutençâo: Oliver Silva <programadorboard@gmail.com>
+#
+# ----------------------------------------------------
+# Este programa configura um sistema de login no terminal.
 # 
 
 # Variáveis resetadas

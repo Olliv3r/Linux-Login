@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
-# login.sh - Adiciona uma segurança no terminal linux
-# Obs.: Usa arquivos de configuração como base
-#
-# Site      : https://programadorboard.epizy.com/autor
-# Autor     : Oliver Silva <programadorboard@gmail.com>
-# Munutençâo: Oliver Silva <programadorboard@gmail.com>
-#
-# ----------------------------------------------------
-# Este programa configura um sistema de login no terminal.
+# 
 # 
 
 # Variáveis resetadas
@@ -21,7 +13,7 @@ unset key_password
 # Acesso padrão
 username_default="root" # Pode alterar
 password_default="toor" # Pode alterar
-mask='×'
+mask='•'		# Pode alterar
 caracter=''
 
 # Textos de uso das funçôes
@@ -156,14 +148,14 @@ verify() {
 }
 # Mensagen de logado
 start() {
-  echo "export LINUX_LOGIN=true" > $HOME/.logged
-  echo "[ -f $HOME/.logged ] && rm -rf $HOME/.logged" > $HOME/.bash_logout
+  echo "export LINUX_LOGIN=true" > /data/data/com.termux/files/usr/tmp/.logged
   reset
-  echo -e "\n\nLogado\n"
+  clear
+  echo -e "Logado\n"
 }
 # Função principal
 main() {
-  if [ -f $HOME/.logged ] ; then
+  if [ -f /data/data/com.termux/files/usr/tmp/.logged ] ; then
     echo -e "\n${msg[6]}"
     exit 0
   else

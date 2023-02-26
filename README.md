@@ -16,7 +16,7 @@ touch $HOME/.bash_login && echo "bash $HOME/login.sh" > $HOME/.bash_login
 Reinicie o termux e veja o resultado.
 ### Remover
 ```
-rm -rf $HOME/.bash_login
+rm -rf $HOME/.bash_login $HOME/login.sh
 ```
 
 ### Recursos:

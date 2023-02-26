@@ -9,11 +9,15 @@ Usuário e Senha padrão: `root` & `toor`
 apt update && apt upgrade -y && apt install wget -y && wget https://raw.githubusercontent.com/Olliv3r/Linux-Login/main/login.sh
 ```
 
-### *Configurar!*
+### Configurar
 ```
 touch $HOME/.bash_login && echo "bash $HOME/login.sh" > $HOME/.bash_login
 ```
 Reinicie o termux e veja o resultado.
+### Remover
+```
+rm -rf $HOME/.bash_login
+```
 
 ### Recursos:
 

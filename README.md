@@ -1,43 +1,19 @@
 ## Painel de login para linux
 Painel de login básico: 
 
-![Captura](https://github.com/Olliv3r/Linux-Login/blob/main/media/main.jpg)
-
 ### Login padrão 
-Usuário e Senha padrão: 
-`root` 
-`toor` 
+Usuário e Senha padrão: `root` & `toor`
 
-Pode ser alterado dentro do código nessa linha: 
-![Captura](https://github.com/Olliv3r/Linux-Login/blob/main/media/login_padrao.jpg)
+### Instalação:
+```
+apt update && apt upgrade -y && apt install wget -y && wget https://raw.githubusercontent.com/Olliv3r/Linux-Login/main/login.sh
+```
 
 ### *Obs!*
 Crie um arquivo chamado `.bash_login` Ou `.bashrc` dentro do diretório raíz do termux e adicione o seguinte:
 ```
-bash $HOME/Linux-Login/login.sh
+touch $HOME/.bash_login && echo "bash $HOME/login.sh" > $HOME/.bash_login
 ```
-
-*Sai e entre no termux*
-
-Apartir daí toda vez que entrar ou abrir uma nova aba, ele vai pedir pra preencher os dados de acesso, *so cuidado pra não esquecer os dodos que colocar, pode perder o acesso.*
-
-### Instalação automática: 
-```
-source <(curl -fsSL https://raw.githubusercontent.com/Olliv3r/Linux-Login/main/install.sh)
-```
-### Remover:
-```
-source <(curl -fsSL https://raw.githubusercontent.com/Olliv3r/Linux-Login/main/remove.sh)
-```
-
-### Mascara ou caractere
-*Você pode escolher se deseja mascarar ou não o usuário e senha, pode alterar nessas linhas:*
-
-#### Usuário:
-![Captura](https://github.com/Olliv3r/Linux-Login/blob/main/media/alterar_usuario.jpg)
-
-#### Senha:
-![Captura](https://github.com/Olliv3r/Linux-Login/blob/main/media/alterar_senha.jpg)
 
 ### Recursos:
 

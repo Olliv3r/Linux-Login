@@ -13,42 +13,34 @@ unset key_password
 # Acesso padrão
 username_default="root" # Pode alterar
 password_default="toor" # Pode alterar
-mask='∗'		# Pode alterar
+mask='∗'                # Pode alterar
 caracter=''
 
 # Textos de uso das funçôes
-msg=(
-  "Username"
-  "Password"
-  "Invalid user"
-  "Invalid password"
-  "Forbidden keys"
-  "Logged in as"
-  "New window"
+msg=("Username" "Password" "Invalid user" "Invalid password" "Forbidden keys" "Logged in as" "New window"
 )
-
-# Alerta de tecla proibida
-alert_user() {
-  if [ -n "$username" -o -z "$username" ] ; then
-    printf "\r${msg[4]}!\n"
-    printf "\r${msg[0]}: "
-    unset username
-    unset caracter
-  fi
+alertUser() {
+    printf "\r${msg[4]}!\n" && printf "\r${msg[0]}: "
+    unset username && unset caracter
 }
-# Alerta de tecla proibida
-alert_password() {
-  if [ -n "$password" -o -z "$password" ] ; then
-    printf "\r${msg[4]}!\n"
-    printf "\r${msg[1]}: "
-    unset password
-    unset caracter
-  fi
+alertPassword() {
+    printf "\r${msg[4]}!\n" && printf "\r${msg[1]}: "
+    unset password && unset caracter
+}
+trapp() {
+  [ -n "$username" -o -z "$username" -a "$1" == "username" ] && trap alertUser SIGINT SIGTSTP
+  [ -n "$password" -o -z "$password" -a "$1" == "password" ] && trap alertPassword SIGINT
+}
+# Backspace
+backspace() {
+  [ -n "$1" -a -n "$2" -a "$2" == "caracter" ] && caracter=${caracter%?}
+  [ -n "$1" -a -n "$2" -a "$2" == "username" ] && username=${username%?} && printf "\b \b"
+  [ -n "$1" -a -n "$2" -a "$2" == "password" ] && password=${password%?} && printf "\b \b"
 }
 # Entrada de usuário
 inputUser() {
-  trap alert_user SIGINT SIGTSTP
-
+  trapp "username"
+  
   printf "\r${msg[0]}: "
   while IFS= read -r -s -n1 input_username ; do
     if [ -z "$input_username" ] ; then
@@ -58,19 +50,11 @@ inputUser() {
 	    unset username
 	    unset password
 
-  	elif [ "$input_username" == $'\x7f' ] ; then
-      if [ -n "$caracter" ] ; then
-  	    caracter=${caracter%?}
-      fi
+    elif [ "$input_username" == $'\x7f' ] ; then
+      backspace $caracter "caracter"
+      backspace $username "username"
 
-      if [ -n "$username" ] ; then
-      	username=${username%?}
-      	printf "\b \b"
-      fi
-
-    elif [ "$input_username" == $'\x1B' ] ||
-    [ "$input_username" == $'\x09' ] ||
-    [ "$input_username" == $'\x20' ] ; then
+    elif [ "$input_username" == $'\x1B' ] || [ "$input_username" == $'\x09' ] || [ "$input_username" == $'\x20' ] ; then
       printf "\r${msg[4]}!\n"
       printf "\r${msg[0]}: "
 
@@ -94,7 +78,7 @@ inputUser() {
 }
 # Entrada de senha
 inputPassword() {
-  trap alert_password SIGINT SIGTSTP
+  trapp "password"
 
   printf "\n"
   printf "\r${msg[1]}: "
@@ -107,14 +91,8 @@ inputPassword() {
       unset caracter
 
     elif [ "$input_password" == $'\x7f' ] ; then
-      if [ -n "$caracter" ] ; then
-        caracter=${caracter%?}
-      fi
-
-      if [ -n "$password" ] ; then
-        password=${password%?}
-        printf "\b \b"
-      fi
+      backspace $caracter "caracter"
+      backspace $password "password"
 
     elif [ "$input_password" == $'\x1B' ] ||
     [ "$input_password" == $'\x09' ] ||

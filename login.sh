@@ -11,9 +11,9 @@ unset key_user
 unset key_password
 
 # Acesso padrão
-username_default="root" # Pode alterar
-password_default="toor" # Pode alterar
-mask='∗'                # Pode alterar
+username_default="oliver" # Pode alterar
+password_default="evilorevilor" # Pode alterar
+mask='×'                # Pode alterar
 caracter=''
 
 # Textos de uso das funçôes
@@ -130,11 +130,14 @@ start() {
   reset
   clear
   echo -e "Logado\n"
+  neofetch --ascii_distro Kali -L
 }
 # Função principal
 main() {
   if [ -f /data/data/com.termux/files/usr/tmp/.logged ] ; then
-    echo -e "\n${msg[6]}"
+    clear
+    neofetch --ascii_distro Kali -L
+    echo -e "${msg[6]}"
     exit 0
   else
     inputUser

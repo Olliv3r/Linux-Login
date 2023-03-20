@@ -11,7 +11,7 @@ apt update && apt upgrade -y && apt install wget -y && wget https://raw.githubus
 
 ### Configurar
 ```
-touch $HOME/.bash_login && echo "bash $HOME/login.sh" > $HOME/.bash_login
+touch $HOME/.bash_login && echo "bash $HOME/Linux-Login/login.sh" >> $HOME/.bash_login
 ```
 Reinicie o termux e veja o resultado.
 ### Remover

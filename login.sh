@@ -11,8 +11,8 @@ unset key_user
 unset key_password
 
 # Acesso padrão
-username_default="oliver" # Pode alterar
-password_default="evilorevilor" # Pode alterar
+username_default="root" # Pode alterar
+password_default="toor" # Pode alterar
 mask='×'                # Pode alterar
 caracter=''
 

@@ -6,7 +6,7 @@ Usuário e Senha padrão: `root` & `toor`
 
 ### Instalação:
 ```
-apt update && apt upgrade -y && apt install wget -y && wget https://raw.githubusercontent.com/Olliv3r/Linux-Login/main/login.sh
+apt update && apt upgrade -y && apt install neofetch wget -y && wget https://raw.githubusercontent.com/Olliv3r/Linux-Login/main/login.sh
 ```
 
 ### Configurar

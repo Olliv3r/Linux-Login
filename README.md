@@ -21,7 +21,7 @@ rm -rf $HOME/.bash_login $HOME/login.sh
 
 ### Recursos:
 
-- [x] Mascara de usuário e senha
+- [x] Mascara de senha
 - [x] Backspace configurado
 - [x] Algumas Teclas de atalho desativadas
 - [ ] Outros

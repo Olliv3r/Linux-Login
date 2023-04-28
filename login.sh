@@ -12,7 +12,16 @@ password='toor'
 mask="×"
 
 
+control() {
+    stty echoctl
+    unset input
+    unset usernameInput
+    unset passwordInput
+}
+
 input() {
+
+    trap control SIGINT SIGTSTP
 
     scape=$(printf '\u1b')
     u=1
@@ -87,7 +96,6 @@ input() {
 
     done
 }
-
 
 session() {
     echo "export LINUX_LOGIN=true" > /data/data/com.termux/files/usr/tmp/.logged

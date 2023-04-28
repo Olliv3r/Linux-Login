@@ -14,7 +14,6 @@ mask="×"
 
 control() {
     stty echoctl
-    unset input
     unset usernameInput
     unset passwordInput
 }
@@ -116,4 +115,6 @@ main() {
     fi
 }
 
-main
+#main
+
+input

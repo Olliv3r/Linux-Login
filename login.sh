@@ -115,6 +115,4 @@ main() {
     fi
 }
 
-#main
-
-input
+main

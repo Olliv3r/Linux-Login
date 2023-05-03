@@ -5,6 +5,8 @@
 #
 # 
 
+clear
+
 # Login padrão (pode alterar)
 
 username='root'
@@ -16,6 +18,8 @@ control() {
     stty echoctl
     unset usernameInput
     unset passwordInput
+    echo -e "\n\n\e[0m\e[31;1;7mMatando sessão por questão de segurança...\e[0m"
+    pkill -KILL -u $(id -nu) &> /dev/null
 }
 
 input() {
@@ -26,12 +30,13 @@ input() {
     u=1
     p=0
 
+    neofetch --ascii_distro Kali -L
     while [[ true ]] ; do
 
-	echo -ne "\rUser Name: $input"
+	echo -ne "\r\e[0m\e[33;1mUser Name:\e[0m $input\e[0m"
 
 	if [[ $p == 1 ]] ; then
-	    echo -ne "\rPass Word: $inputMask"
+	    echo -ne "\r\e[0m\e[33;1mPass Word:\e[0m $inputMask\e[0m"
 
 	fi
 
@@ -66,7 +71,7 @@ input() {
 		    p=1
 
 		else
-		    echo -e "\n\e[0m\e[31;1mInvalid user\e[0m"
+		    echo -e "\n\e[0m\e[31;3mInvalid user\e[0m"
 		fi
 
 	    elif [[ -n $input ]] && [[ $u == 1 ]] && [[ $p == 1 ]] ; then
@@ -81,7 +86,7 @@ input() {
 		    break
 
 		else
-		    echo -e "\n\e[0m\e[31;1mInvalid password\e[0m"
+		    echo -e "\n\e[0m\e[31;3mInvalid password\e[0m"
 
 		fi
 
@@ -98,15 +103,18 @@ input() {
 
 session() {
     echo "export LINUX_LOGIN=true" > /data/data/com.termux/files/usr/tmp/.logged
-    clear
-    neofetch --ascii_distro Kali -L
+    banner
     echo -e "Novo login\n"
+}
+
+banner() {
+	clear
+	neofetch --ascii_distro kali -L
 }
 
 main() {
     if [ -f /data/data/com.termux/files/usr/tmp/.logged ] ; then
-	clear
-	neofetch --ascii_distro Kali -L
+	banner
 	echo -e "Nova aba\n"
 
     else
@@ -114,5 +122,5 @@ main() {
 
     fi
 }
-
+	
 main

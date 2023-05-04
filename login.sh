@@ -40,7 +40,6 @@ input() {
     u=1
     p=0
 
-    neofetch --ascii_distro Kali -L
     while [[ true ]] ; do
 
 	echo -ne "\r\e[0m\e[33;1mUser Name:\e[0m $input\e[0m"
@@ -135,6 +134,7 @@ main() {
 	echo -e "New window\n"
 
     else
+	banner
 	input
 
     fi

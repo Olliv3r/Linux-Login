@@ -1,8 +1,9 @@
 ## Painel de login para linux
-Painel de login básico: 
+Painel de login básico:
+![main](https://github.com/Olliv3r/Linux-Login/blob/main/media/main.jpg)
 
 ### Login padrão 
-Usuário e Senha padrão: `root` & `toor`
+Caso não exista usuário configurado, o usuário e Senha padrão serão: `root` & `toor`
 
 ### Instalação:
 ```
@@ -12,7 +13,7 @@ apt update && apt upgrade -y && apt install neofetch python git -y && cd ~ && gi
 ### Configurar
 Configurar um usuário e senha, caso queira, o logo aleatório também:
 ```
-bash setup.sh
+cd ~/Linux-Login && bash ./setup.sh
 ```
 
 Pedir o acesso na inicialização:

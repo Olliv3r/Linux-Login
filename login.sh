@@ -7,12 +7,21 @@
 
 clear
 
-# Login padrão (pode alterar)
+if [[ -d ~/Linux-Login/user ]] ; then
+    dir=~/Linux-Login/user/*.user
+    regex=$(grep -Eo ":.*" $dir | tr -d \ :)
 
-username='root'
-password='toor'
-mask="×"
+    user=$(echo "$regex" | head -1)
+    pass=$(echo "$regex" | tail -1)
 
+else
+    unset user
+    unset pass
+fi
+
+mask='×' # Pode alterar a mascara
+username="${user:-root}"
+password="${pass:-toor}"
 
 control() {
     stty echoctl
@@ -20,6 +29,7 @@ control() {
     unset passwordInput
     echo -e "\n\n\e[0m\e[31;1;7mMatando sessão por questão de segurança...\e[0m"
     pkill -KILL -u $(id -nu) &> /dev/null
+
 }
 
 input() {
@@ -104,18 +114,25 @@ input() {
 session() {
     echo "export LINUX_LOGIN=true" > /data/data/com.termux/files/usr/tmp/.logged
     banner
-    echo -e "Novo login\n"
+    echo -e "New login\n"
 }
 
 banner() {
 	clear
-	python ~/Linux-Login/banner.py
+
+	if [[ -f ~/Linux-Login/.banner ]] ; then
+	    file="$(cat ~/Linux-Login/.banner)"
+
+	    if [[ "$file" == "on" ]] ; then
+		python ~/Linux-Login/banner.py
+	    fi
+	fi
 }
 
 main() {
     if [ -f /data/data/com.termux/files/usr/tmp/.logged ] ; then
 	banner
-	echo -e "Nova aba\n"
+	echo -e "New window\n"
 
     else
 	input

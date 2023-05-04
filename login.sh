@@ -109,7 +109,7 @@ session() {
 
 banner() {
 	clear
-	neofetch --ascii_distro kali -L
+	python ~/Linux-Login/banner.py
 }
 
 main() {

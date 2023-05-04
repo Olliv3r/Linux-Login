@@ -6,17 +6,17 @@ Usuário e Senha padrão: `root` & `toor`
 
 ### Instalação:
 ```
-apt update && apt upgrade -y && apt install neofetch wget -y && wget https://raw.githubusercontent.com/Olliv3r/Linux-Login/main/login.sh
+apt update && apt upgrade -y && apt install neofetch python wget -y && wget https://raw.githubusercontent.com/Olliv3r/Linux-Login/main/login.sh
 ```
 
 ### Configurar
 ```
-touch $HOME/.bash_login && echo "bash $HOME/login.sh" > $HOME/.bash_login
+touch ~/.bash_login && echo "bash ~/Linux-Login/login.sh" > ~/.bash_login
 ```
 Reinicie o termux e veja o resultado.
 ### Remover
 ```
-rm -rf $HOME/.bash_login $HOME/login.sh
+sed -i "s/bash ~\/Linux\-Login\/login\.sh//g" ~/.bash_login
 ```
 
 ### Recursos:

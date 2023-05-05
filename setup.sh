@@ -70,7 +70,7 @@ eof
     cat .backup/.bash_login >> .config
     cp .config ~/.bash_login
 
-    echo "User registed"
+    echo "Registered $user user"
     echo "Backup in /sdcard/$user.user"
     echo "Saindo..."
     sleep 2s

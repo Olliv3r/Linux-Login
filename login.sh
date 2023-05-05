@@ -5,8 +5,6 @@
 #
 # 
 
-clear
-
 if [[ -d ~/Linux-Login/user ]] ; then
     dir=~/Linux-Login/user/*.user
     regex=$(grep -Eo ":.*" $dir | tr -d \ :)

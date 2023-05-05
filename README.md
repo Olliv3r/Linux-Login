@@ -10,25 +10,16 @@ Caso não exista usuário configurado, o usuário e Senha padrão serão: `root`
 apt update && apt upgrade -y && apt install neofetch python git -y && cd ~ && git clone https://github.com/Olliv3r/Linux-Login
 ```
 
-### Configurar
-Configurar um usuário e senha, caso queira, o logo aleatório também:
+### Modo de uso:
+Fazer:
 ```
-cd ~/Linux-Login && bash ./setup.sh
-```
-
-Pedir o acesso na inicialização:
-```
-touch ~/.bash_login && echo "bash ~/Linux-Login/login.sh" > ~/.bash_login
-```
-Reinicie o termux e veja o resultado!
-```
-exit
+cd ~/Linux-Login && bash ./setup.sh --setup
 ```
 
 ### Desfazer
-Remover a linha (que pede o acesso) do arquivo `.bash_login`:
+Desfazer:
 ```
-sed -i "s/bash ~\/Linux\-Login\/login\.sh//g" ~/.bash_login
+cd ~/Linux-Login && bash ./setup.sh --undo
 ```
 
 ### Recursos:

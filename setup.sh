@@ -5,9 +5,7 @@
 # Por oliver
 #
 
-if [[ -f .banner ]] ; then
-    rm .banner
-fi
+modo_uso="\t-h, --help\tShow this help screen and exit\n\t--setup\t\tConfigure user and password\n\t--undo\t\tUndo the configuration\n"
 
 user() {
     read -p "New user: " user
@@ -64,20 +62,70 @@ user: $user
 password: $password
 eof
 
-    if [[ ! -d ~/storage ]] ; then
+    allowAccessMemoryStorage
 
-        echo "Allow memory storage"
-	sleep 3s
-	cp user/*.user /sdcard
+    [[ -f ~/.bash_login ]] && cp ~/.bash_login .backup && rm ~/.bash_login
 
-    else
-        cp user/*.user /sdcard
-    fi
+    echo "bash ~/Linux-Login/login.sh" > .config
+    cat .backup/.bash_login >> .config
+    cp .config ~/.bash_login
 
     echo "User registed"
     echo "Backup in /sdcard/$user.user"
+    echo "Saindo..."
+    sleep 2s
+    pkill -KILL -u $(id -nu) &> /dev/null
 }
 
-python banner.py
+allowAccessMemoryStorage() {
+    if [[ ! -d ~/storage ]] ; then
+        echo "Allow memory storage"
+        sleep 2s
+	termux-setup-storage
 
-user
+    else
+	cp user/*.user /sdcard
+    fi
+}
+
+setup() {
+    
+    if [[ -f .banner ]] ; then
+	rm .banner
+    fi
+
+    python banner.py
+    user
+}
+
+undo() {
+    echo "Enter to continue" ; read
+
+    if [[ -f .backup/.bash_login ]] ; then
+        rm ~/.bash_login &> /dev/null
+        echo "Restoring previous backup..."
+        cp .backup/.bash_login ~/.bash_login &> /dev/null
+	rm .backup/.bash_login
+    else
+	echo "No backup"
+	exit
+    fi
+}
+
+[[ -z "$1" ]] && echo "Try -h | --help" && exit
+
+while [[ -n "$1" ]] ; do
+	case "$1" in
+		-h|--help)
+			echo -e "$modo_uso";;
+		--setup)
+			setup;;
+		--undo)
+			undo;;
+		*)
+			echo "Try -h | --help"
+			exit;;
+
+	esac
+	shift
+done

@@ -117,11 +117,12 @@ session() {
 banner() {
 	clear
 
-	if [[ -f ~/Linux-Login/.banner ]] ; then
-	    file="$(cat ~/Linux-Login/.banner)"
+	if [[ -f $HOME/Linux-Login/.banner ]] ; then
+
+	    file="$(cat $HOME/Linux-Login/.banner)"
 
 	    if [[ "$file" == "on" ]] ; then
-		python ~/Linux-Login/banner.py
+		python $HOME/Linux-Login/banner.py
 	    fi
 	fi
 }

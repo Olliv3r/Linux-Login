@@ -1,4 +1,3 @@
-
 #!/bin/bash
 # Cadastra um usuário
 # 
@@ -7,7 +6,14 @@
 
 modo_uso="\t-h, --help\tShow this help screen and exit\n\t--setup\t\tConfigure user and password\n\t--undo\t\tUndo the configuration\n"
 
+root=$HOME/Linux-Login
+default_file=$HOME/.bash_login
+backup_file=$root/.backup/.bash_login
+delay=0.2
+
+# Entrada de nome de usuário
 user() {
+
     read -p "New user: " user
 
     if [[ -z $user ]] ; then
@@ -17,9 +23,12 @@ user() {
     else
 	password
     fi
+
 }
 
+# Entrada de senha
 password() {
+    
     read -p "New password: " password
 
     if [[ -z $password ]] ; then
@@ -43,51 +52,96 @@ password() {
 	    fi
 	fi
     fi
+
 }
 
+# Registrar dados de acesso
 register() {
+
+    createDirectoryReq
+    
+    username=$1
+    password=$2
+
+    appendUser $username $password
+
+    allowStorage
+    
+    if [[ -f $default_file ]] ; then
+	cp $default_file .backup && rm $default_file
+	apply
+
+   else
+	apply
+
+    fi
+}
+
+# Cria diretórios necessários
+createDirectoryReq() {
     if [[ -d user ]] ; then
-        rm -rf user
-	mkdir user
-	
-    else
+	rm -rf user
 	mkdir user
     fi
 
-    user=$1
+    if [[ ! -d user ]] ; then
+	mkdir user
+    fi
+
+    if [[ ! -d .backup ]] ; then
+	mkdir .backup
+    fi
+}
+
+# Adicionar o usuário
+appendUser() {
+    username=$1
     password=$2
 
-    cat ->> ./user/${user}.user <<- eof
-user: $user
+    cat ->> user/${username}.user <<- eof
+user: $username
 password: $password
 eof
 
-    allowAccessMemoryStorage
+}
 
-    [[ -f ~/.bash_login ]] && cp ~/.bash_login .backup && rm ~/.bash_login
+# Confirmar a configuração
+apply() {
+    if [[ -f .config ]] ; then
+	rm .config
+    fi
 
     echo "bash ~/Linux-Login/login.sh" > .config
-    cat .backup/.bash_login >> .config
-    cp .config ~/.bash_login
 
-    echo "Registered $user user"
-    echo "Backup in /sdcard/$user.user"
-    echo "Saindo..."
+    if [[ -f $backup_file ]] ; then
+	cat $backup_file >> .config
+	cp .config $default_file
+    fi
+
+    if [[ ! -f $backup_file ]] ; then
+	cp .config $default_file
+    fi
+
+    echo "Registered $username user"
+    echo "Backup in /sdcard/$username.user"
+    echo "Stopping..."
+    	
     sleep 2s
     pkill -KILL -u $(id -nu) &> /dev/null
 }
 
-allowAccessMemoryStorage() {
-    if [[ ! -d ~/storage ]] ; then
-        echo "Allow memory storage"
-        sleep 2s
+# Permitir acesso ao armazenamento
+allowStorage() {
+    while [[ ! -d $HOME/storage ]] ; do
+	echo
+	read -p "Allow internal memory 'ENTER' to continue..." enter
+	echo
+	sleep ${deley}s
 	termux-setup-storage
-
-    else
-	cp user/*.user /sdcard
-    fi
+    done
 }
 
+# Fazer
 setup() {
     
     if [[ -f .banner ]] ; then
@@ -98,17 +152,48 @@ setup() {
     user
 }
 
+# Desfazer
 undo() {
-    echo "Enter to continue" ; read
+    echo "Enter to continue..." ; read
+    restory_previous_file
+    file_remove $backup_file
+    
+}
 
-    if [[ -f .backup/.bash_login ]] ; then
-        rm ~/.bash_login &> /dev/null
-        echo "Restoring previous backup..."
-        cp .backup/.bash_login ~/.bash_login &> /dev/null
-	rm .backup/.bash_login
+file_remove() {
+    file=$1
+
+    if [[ ! -f $file ]] ; then
+	echo -e "\e[0mRemoving $file...\e[31;1mNot exists\e[0m"
+
     else
-	echo "No backup"
-	exit
+
+        rm $file &> /dev/null
+
+	if [[ ! -f $file ]] ; then
+            echo -e "\e[0mRemoving $file...\e[32;1mOK\e[0m"
+
+	else
+	    echo -e "\e[0mRemoving $file...\e[31;1mFailed\e[0m"
+
+	fi
+
+    fi
+}
+
+restory_previous_file() {
+    if [[ -f $backup_file ]] ; then
+	cat $backup_file > $default_file
+
+	if [ -f $default_file -a ! -f $backup_file ] || [ -f $default_file -a -f $backup_file ]; then
+	    echo -e "\e[0mRestoring previous file...\e[32;1mOK\e[0m"
+
+        else
+	    echo -e "\e[0mRestoring previous file...\e[31;1mFailed\e[0m"
+	fi
+
+    else
+	echo -e "\e[0mRestoring previous file...\e[31;1mNot exists\e[0m"
     fi
 }
 
@@ -116,11 +201,11 @@ undo() {
 
 while [[ -n "$1" ]] ; do
 	case "$1" in
-		-h|--help)
+		help|-h|--help)
 			echo -e "$modo_uso";;
-		--setup)
+		setup|-s|--setup)
 			setup;;
-		--undo)
+		undo|-u|--undo)
 			undo;;
 		*)
 			echo "Try -h | --help"

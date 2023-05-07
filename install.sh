@@ -34,6 +34,8 @@ install() {
 }
 
 clonn() {
+    [[ -d ~/Linux-Login ]] && rm ~/Linux-Login
+
     apt install net-tools -y &> /dev/null
     cd ~
     git clone https://github.com/Olliv3r/Linux-Login &> /dev/null

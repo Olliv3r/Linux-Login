@@ -5,37 +5,15 @@
 #
 #
 
-pkg upgrade -y && apt install ncurses-utils -y
-
-
-anim() {
-    local pid=$!
-    local chars=("." ".." "..." "....")
-    local delay=0.5
-
-
-    while [ $(ps a | awk '{printf $1}' | grep $pid) ] ; do
-	for char in ${chars[*]} ; do
-	    tput civis
-	    printf "\e[0m\e[32;2m\r[*] $1${char}\e[0m"
-	    sleep ${delay}s
-	    printf "\b\b\b\b\b\b\b\b"
-	done
-    done
-
-    printf "\b\b\b\b"
-    printf "\e[0m\e[32;2m\r[+] $1....OK\e[0m\n"
-    tput cnorm
-}
-
 install() {
-    apt install neofetch python git -y > /dev/null 2>&1
+    pkg upgrade -y && apt install ncurses-utils -y
+    apt install neofetch python git -y
 }
 
 clone() {
-    [[ -d ~/Linux-Login ]] && rm -rf ~/Linux-Login > /dev/null 2>&1
+    [[ -d ~/Linux-Login ]] && rm -rf ~/Linux-Login
     cd ~
-    git clone https://github.com/Olliv3r/Linux-Login > /dev/null 2>&1
+    git clone https://github.com/Olliv3r/Linux-Login
 }
 
 show_use() {
@@ -46,6 +24,6 @@ show_use() {
 }
 
 clear
-install & anim "Installing packages"
-clone & anim "Cloning repository"
+install
+clone
 show_use

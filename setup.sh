@@ -148,7 +148,7 @@ undo() {
     restory_previous_file
     
     echo -e "\e[0mRemoving files...\e[0m"
-    for f in "$root/user/" "$root/.backup/" "$root/distros.txt" "$root/.banner"; do
+    for f in "$root/user/" "$root/.backup/" "$root/distros.txt" "$root/.banner" "$root/.config"; do
 	file_remove $f
     done
     

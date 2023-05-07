@@ -63,7 +63,7 @@ appendUser() {
     username=$1
     password=$2
 
-    cat ->> user/${username}.user <<- eof
+    cat ->> $root/user/${username}.user <<- eof
 username: $username
 password: $password
 eof
@@ -76,9 +76,9 @@ eof
 # Cria diretórios necessários
 
 createDirectoryReq() {
-    [[ -d user ]] && rm -rf user && mkdir user
-    [[ ! -d user ]] && mkdir user
-    [[ ! -d .backup ]] && mkdir .backup
+    [[ -d $root/user ]] && rm -rf $root/user && mkdir $root/user
+    [[ ! -d $root/user ]] && mkdir $root/user
+    [[ ! -d $root/.backup ]] && mkdir $root/.backup
 }
 
 # Permite o acesso a memoria
@@ -136,8 +136,8 @@ apply() {
 # Fazer
 
 setup() {
-    [[ -f .banner ]] && rm .banner
-    python banner.py
+    [[ -f $root/.banner ]] && rm $root/.banner
+    python $root/banner.py
     user
 }
 

@@ -3,23 +3,23 @@ Painel de login básico:
 ![main](https://github.com/Olliv3r/Linux-Login/blob/main/media/main.jpg)
 
 ### Login padrão 
-Caso não exista usuário configurado, o usuário e Senha padrão serão: `root` & `toor`
+Se caso não existir um usuário configurado, o login padrão será: `root` & `toor`
 
 ### Instalação:
 ```
-apt update && apt upgrade -y && apt install neofetch python git -y && cd ~ && git clone https://github.com/Olliv3r/Linux-Login
+source <(curl -fsSL https://raw.githubusercontent.com/Olliv3r/Linux-Login/main/install.sh)
 ```
 
 ### Modo de uso:
 Fazer:
 ```
-cd ~/Linux-Login && bash ./setup.sh --setup
+bash ~/Linux-Login/setup.sh setup
 ```
 
 ### Desfazer
 Desfazer:
 ```
-cd ~/Linux-Login && bash ./setup.sh --undo
+bash ~/Linux-Login/setup.sh undo
 ```
 
 ### Recursos:

@@ -29,11 +29,11 @@ anim() {
 }
 
 install() {
-    apt install neofetch python git -y &> /dev/null
+    apt install neofetch python git -y > /dev/null 2>&1
 }
 
 clone() {
-    [[ -d ~/Linux-Login ]] && rm ~/Linux-Login
+    [[ -d ~/Linux-Login ]] && rm -rf ~/Linux-Login > /dev/null 2>&1
     cd ~
     git clone https://github.com/Olliv3r/Linux-Login > /dev/null 2>&1
 }

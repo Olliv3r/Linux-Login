@@ -13,13 +13,13 @@ source <(curl -fsSL https://raw.githubusercontent.com/Olliv3r/Linux-Login/main/i
 ### Modo de uso:
 Fazer:
 ```
-bash ~/Linux-Login/setup.sh setup
+bash ~/Linux-Login/setup.sh --setup
 ```
 
 ### Desfazer
 Desfazer:
 ```
-bash ~/Linux-Login/setup.sh undo
+bash ~/Linux-Login/setup.sh --undo
 ```
 
 ### Recursos:

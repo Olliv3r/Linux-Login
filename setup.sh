@@ -88,11 +88,12 @@ createDirectoryReq() {
 allowStorage() {
     while [[ ! -d $HOME/storage ]] ; do
 	echo
-	read -p "Allow internal memory..."
-	sleep 3s
+	read -p "Allow internal memory 'ENTER'..."
 	termux-setup-storage
 	sleep 3s
     done
+
+    cp $root/user/*.user /sdcard
 }
 
 # Fazer o backup

@@ -10,6 +10,7 @@ import os
 root = "/data/data/com.termux/files/home/Linux-Login"
 
 def banner():
+    global distro
 
     regex = 'neofetch --help | tr -d "\n " | grep -Eo "AIX.*Zorin" | sed -e "s/,/\\n/g" | tr -d \\"'
     distros = os.system(regex + str(f" > {root}/distros.txt"))
@@ -19,7 +20,7 @@ def banner():
     distro = random.choice(list(distros)).rstrip()
 
     os.system(f'neofetch --ascii_distro {distro} -L')
-    
+
 def _input():
 
     if not os.path.exists(f"{root}/.banner"):
@@ -27,7 +28,7 @@ def _input():
 
         if res == "y" or res == "yes":
             os.system(f"echo 'on' > {root}/.banner")
-    
+
         elif res == "n" or res == "no":
             os.system(f"echo 'off' > {root}/.banner")
 
@@ -35,8 +36,8 @@ def _input():
             _input()
 
     else:
-        
         banner()
+        print(distro + str("\n"))
 
 
 _input()

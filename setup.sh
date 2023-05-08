@@ -140,8 +140,8 @@ apply() {
     echo "Backup in /sdcard/$username.user"
     echo "Stopping..."
     	
-    # sleep 2s
-    # pkill -KILL -u $(id -nu) &> /dev/null
+    sleep 2s
+    pkill -KILL -u $(id -nu) &> /dev/null
 }
 
 # Fazer

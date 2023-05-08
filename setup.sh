@@ -1,6 +1,6 @@
 #!/bin/bash
-# Cadastra um usuário
-# 
+# Configura um usuário personalizado
+#
 # Por oliver
 #
 
@@ -30,7 +30,7 @@ user() {
 # Entrada de senha
 
 password() {
-    
+
     read -p "New password: " password
 
     if [[ -z $password ]] ; then
@@ -103,17 +103,16 @@ get_backup_file() {
 	str=$(grep -Eo "bash.*login\.sh" $default_file)
 
 	if [[ -n "$str" ]] ; then
-	    
-	    sed -i "s/bash.*login\.sh//g" $default_file
+	    sed -i "/bash.*login\.sh/d" $default_file
 	    cat $default_file > $backup_file
-	    
+
 	    if [[ -f $backup_file ]] ; then
 		echo "Backup done successfully"
 
             else
 		echo "Couldn't make backup"
 	    fi
-	    
+
 	else
 	    cat $default_file > $backup_file
 	fi
@@ -136,11 +135,11 @@ apply() {
     fi
 
     cat $root/.config > $default_file
-    
+
     echo "Registered $username user"
     echo "Backup in /sdcard/$username.user"
     echo "Stopping..."
-    	
+
     sleep 2s
     pkill -KILL -u $(id -nu) &> /dev/null
 }
@@ -158,7 +157,7 @@ setup() {
 undo() {
     echo -n "Enter to continue..." ; read
     restory_previous_file
-    
+
     echo -e "\e[0mRemoving files...\e[0m"
     for f in "$root/user/" "$root/.backup/" "$root/distros.txt" "$root/.banner" "$root/.config"; do
 	file_remove $f
@@ -171,7 +170,7 @@ undo() {
 	    file_remove $default_file
 	fi
     fi
-    
+
 }
 
 # Restaurar o backup
@@ -182,7 +181,7 @@ restory_previous_file() {
 
 	if [[ -f $default_file ]] ; then
 	    echo "Backup Restored Successfully"
-	
+
         else
 	    echo "Could not restore backup"
 	fi

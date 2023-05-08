@@ -3,7 +3,7 @@
 #
 # Autor, Oliver
 #
-# 
+#
 
 if [[ -d ~/Linux-Login/user ]] ; then
     dir=~/Linux-Login/user/*.user
@@ -62,7 +62,7 @@ input() {
 	        input=${input%?}
 		inputMask=${inputMask%?}
 	        printf "\b \b"
-		
+
 	    fi
 
 	elif [[ $mode == $'\0A' ]] ; then
@@ -138,5 +138,5 @@ main() {
 
     fi
 }
-	
+
 main

@@ -24,9 +24,9 @@ bash ~/Linux-Login/setup.sh --undo
 
 ### Recursos:
 
-- [x] Mascara de senha
-- [x] Backspace configurado
+- [x] Mascara de senha (opcional)
+- [x] Backspace
 - [x] Algumas Teclas de atalho desativadas
-- [x] Configuração de usuário e senha
-- [x] Logos aleatórios (opcional)
+- [x] Login personalizado (opcional)
+- [x] Logo aleatório (opcional)
 - [ ] Outros

@@ -40,10 +40,10 @@ input() {
 
     while [[ true ]] ; do
 
-	echo -ne "\r\e[0m\e[33;1mUser Name:\e[0m $input\e[0m"
+	echo -ne "\r\e[0mUser name:\e[0m $input\e[0m"
 
 	if [[ $p == 1 ]] ; then
-	    echo -ne "\r\e[0m\e[33;1mPass Word:\e[0m $inputMask\e[0m"
+	    echo -ne "\r\e[0mPass word:\e[0m $inputMask\e[0m"
 
 	fi
 

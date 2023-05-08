@@ -12,6 +12,7 @@ backup_file=$root/.backup/.bash_login
 delay=0.2
 
 # Entrada de nome de usuário
+
 user() {
 
     read -p "New user: " user
@@ -27,6 +28,7 @@ user() {
 }
 
 # Entrada de senha
+
 password() {
     
     read -p "New password: " password
@@ -73,7 +75,7 @@ eof
     apply
 }
 
-# Cria diretórios necessários
+# Criar diretórios necessários
 
 createDirectoryReq() {
     [[ -d $root/user ]] && rm -rf $root/user && mkdir $root/user
@@ -81,38 +83,47 @@ createDirectoryReq() {
     [[ ! -d $root/.backup ]] && mkdir $root/.backup
 }
 
-# Permite o acesso a memoria
+# Permitir o acesso a memoria
 
 allowStorage() {
     while [[ ! -d $HOME/storage ]] ; do
 	echo
-	read -p "Allow internal memory 'ENTER' to continue..." enter
-	echo
-	sleep ${delay}s
+	read -p "Allow internal memory..."
+	sleep 3s
 	termux-setup-storage
-done
+	sleep 3s
+    done
 }
 
 # Fazer o backup
+
 get_backup_file() {
     if [[ -f $default_file ]] ; then
-	cat $default_file > $backup_file
+	str=$(grep -Eo "bash.*login\.sh" $default_file)
 
-	if [[ -f $backup_file ]] ; then
-	    echo "Backup done successfully"
+	if [[ -n "$str" ]] ; then
+	    
+	    sed -i "s/bash.*login\.sh//g" $default_file
+	    cat $default_file > $backup_file
+	    
+	    if [[ -f $backup_file ]] ; then
+		echo "Backup done successfully"
 
-        else
-	    echo "Couldn't make backup"
+            else
+		echo "Couldn't make backup"
+	    fi
+	    
+	else
+	    cat $default_file > $backup_file
 	fi
 
     else
 	echo "No file for backup"
-	echo "" > $backup_file
     fi
 }
 
 
-# Aplica a configuração
+# Aplicar a configuração
 
 apply() {
     [[ -f $root/.config ]] && rm $root/.config
@@ -129,8 +140,8 @@ apply() {
     echo "Backup in /sdcard/$username.user"
     echo "Stopping..."
     	
-    sleep 2s
-    pkill -KILL -u $(id -nu) &> /dev/null
+    # sleep 2s
+    # pkill -KILL -u $(id -nu) &> /dev/null
 }
 
 # Fazer
@@ -151,6 +162,14 @@ undo() {
     for f in "$root/user/" "$root/.backup/" "$root/distros.txt" "$root/.banner" "$root/.config"; do
 	file_remove $f
     done
+
+    if [[ -f $default_file ]] ; then
+	str=$(grep -Eo "bash.*login\.sh" $default_file)
+
+	if [[ -n "$str" ]] ; then
+	    file_remove $default_file
+	fi
+    fi
     
 }
 
@@ -172,6 +191,8 @@ restory_previous_file() {
     fi
 }
 
+# Remove arquivo ou diretório
+
 file_remove() {
     file=$1
 
@@ -190,20 +211,23 @@ file_remove() {
     fi
 }
 
-[[ -z "$1" ]] && echo "Try -h | --help" && exit
+# Verifica argumentos
+
+[[ -z "$1" ]] && echo "Error: try $0 -h | --help | help to help" && exit
+
+# Trata os argumentos e opçôes
 
 while [[ -n "$1" ]] ; do
-	case "$1" in
-		help|-h|--help)
-			echo -e "$modo_uso";;
-		setup|-s|--setup)
-			setup;;
-		undo|-u|--undo)
-			undo;;
-		*)
-			echo "Error: try $0 -h, --help, help"
-			exit;;
-
-	esac
-	shift
+    case "$1" in
+	help|-h|--help)
+	    echo -e "$modo_uso";;
+	setup|-s|--setup)
+	    setup;;
+	undo|-u|--undo)
+	    undo;;
+	*)
+	    echo "Error: try $0 -h, --help, help to help"
+	    exit;;
+    esac
+    shift
 done

@@ -6,7 +6,7 @@
 #
 
 if [[ -d ~/Linux-Login/user ]] ; then
-    dir=~/Linux-Login/user/*.user
+    dir=~/Linux-Login/user/*.txt
     regex=$(grep -Eo ":.*" $dir | tr -d \ :)
 
     user=$(echo "$regex" | head -1)

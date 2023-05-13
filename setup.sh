@@ -65,7 +65,7 @@ appendUser() {
     username=$1
     password=$2
 
-    cat ->> $root/user/${username}.user <<- eof
+    cat ->> $root/user/${username}.user.txt <<- eof
 username: $username
 password: $password
 eof
@@ -90,10 +90,11 @@ allowStorage() {
 	echo
 	read -p "Allow internal memory 'ENTER'..."
 	termux-setup-storage
-	sleep 3s
+
+	read -p "Confirm memory permission by pressing 'ENTER'..."
     done
 
-    cp $root/user/*.user /sdcard
+    cp $root/user/*.txt /sdcard
 }
 
 # Fazer o backup
@@ -137,7 +138,7 @@ apply() {
     cat $root/.config > $default_file
 
     echo "Registered $username user"
-    echo "Backup in /sdcard/$username.user"
+    echo "Backup in /sdcard/$username.user.txt"
     echo "Stopping..."
 
     sleep 2s

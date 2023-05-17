@@ -20,7 +20,7 @@ show_use() {
     local root="~/Linux-Login"
 
     echo -e "\n\e[0m\e[32;2mRun '\e[33;1mbash ./setup.sh setup\e[0m\e[32;2m' to configure \nOR '\e[33;1mbash ./setup.sh undo\e[0m\e[32;2m' to undo\e[0m"
-    cd ~/Linux-Login
+    #cd ~/Linux-Login
 }
 
 clear
